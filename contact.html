@@ -45,13 +45,38 @@ font-weight:700;
 
 .contact-card,
 .form-card{
-background:white;
-border:none;
-border-radius:20px;
-padding:25px;
-box-shadow:0 10px 25px rgba(0,0,0,.08);
-transition:.4s;
+    background: #fff;
+    padding: 35px;
+    border: 2px solid #198754; /* Green Border */
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    transition: all 0.3s ease;
 }
+
+.form-card:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.18);
+}
+
+.form-card h3{
+    color: black;
+    font-weight: 700;
+    text-align: center;
+}
+
+.custom-input{
+    border: 1px solid #ced4da;
+    border-radius: 10px;
+    padding: 12px 15px;
+    transition: all 0.3s ease;
+}
+
+.custom-input:focus{
+    border-color: #198754;
+    box-shadow: 0 0 10px rgba(25,135,84,0.25);
+}
+
+
 
 .contact-card:hover{
 transform:translateY(-8px);
@@ -61,10 +86,6 @@ transform:translateY(-8px);
 font-size:40px;
 color:var(--primary);
 margin-bottom:15px;
-}
-
-.form-card{
-padding:35px;
 }
 
 .custom-input{
@@ -81,7 +102,7 @@ box-shadow:none;
 background:var(--primary);
 color:white;
 padding:12px 35px;
-border-radius:50px;
+border-radius:20px;
 }
 
 .btn-custom:hover{
@@ -94,7 +115,15 @@ overflow:hidden;
 border-radius:20px;
 box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
+.map-card{
+    overflow: hidden;
+    
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
 
+.map-card iframe{
+    display: block;
+}
 .footer-section{
 background:#0f172a;
 color:white;
@@ -209,44 +238,45 @@ Categories
 
 </div>
 
-<div class="row">
+<div class="row g-4 mb-5">
 
-<div class="col-lg-8 mx-auto">
+    <!-- Contact Form Left Side -->
+    <div class="col-lg-6">
+        <div class="form-card h-100">
 
-<div class="form-card">
+            <h3 class="mb-4">Send a Message</h3>
 
-<h3 class="mb-4">Send a Message</h3>
+            <form id="contactForm">
 
-<form id="contactForm">
+                <input type="text" id="name" class="form-control custom-input mb-3" placeholder="Your Name">
 
-<input type="text" id="name" class="form-control custom-input mb-3" placeholder="Your Name">
+                <input type="email" id="email" class="form-control custom-input mb-3" placeholder="Your Email">
 
-<input type="email" id="email" class="form-control custom-input mb-3" placeholder="Your Email">
+                <input type="text" id="subject" class="form-control custom-input mb-3" placeholder="Subject">
 
-<input type="text" id="subject" class="form-control custom-input mb-3" placeholder="Subject">
+                <textarea id="message" rows="5" class="form-control custom-input mb-3" placeholder="Write your message"></textarea>
 
-<textarea id="message" rows="5" class="form-control custom-input mb-3" placeholder="Write your message"></textarea>
+                <button type="submit" class="btn btn-custom">Send Message</button>
 
-<button type="submit" class="btn btn-custom">Send Message</button>
+            </form>
 
-</form>
+            <div id="msg" class="mt-3"></div>
 
-<div id="msg" class="mt-3"></div>
+        </div>
+    </div>
+
+    <!-- Map Right Side -->
+    <div class="col-lg-6">
+        <div class="map-card h-100">
+            <iframe
+                src="https://www.google.com/maps?q=Karachi&output=embed"width="100%" height="100%"style="border:0; min-height:450px;">
+            </iframe>
+        </div>
+    </div>
 
 </div>
 
 </div>
-
-</div>
-
-</div>
-
-<section class="container pb-5">
-<div class="map-card">
-<iframe src="https://www.google.com/maps?q=Karachi&output=embed"
-width="100%" height="350" style="border:0;"></iframe>
-</div>
-</section>
 
 <section class="container py-5">
 <h2 class="text-center text-success mb-4">Frequently Asked Questions</h2>
@@ -282,16 +312,60 @@ Visitors can explore the longest, tallest, highest and oldest bridges.
 </div>
 </section>
 
+<!-- FOOTER -->
+
 <footer class="footer-section">
-<div class="container text-center">
-<h4>Amazing Bridges</h4>
-<p>Discover the world's most famous bridges.</p>
+
+<div class="container">
+
+<div class="row">
+
+<div class="col-md-4 mb-4">
+<h4><i class="fa-solid fa-bridge-water"></i> Amazing Bridges</h4>
+<p>
+Explore the world's most incredible bridges,
+their history, architecture, and engineering marvels.
+</p>
+</div>
+
+<div class="col-md-4 mb-4">
+<h5>Quick Links</h5>
+<ul class="footer-links">
+<li><a href="home.html">Home</a></li>
+<li><a href="gallery.html">Gallery</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</div>
+
+<div class="col-md-4 mb-4">
+<h5>Follow Us</h5>
+
 <div class="social-icons">
-<i class="fab fa-facebook"></i>
-<i class="fab fa-instagram"></i>
-<i class="fab fa-youtube"></i>
+<a href="#"><i class="fab fa-facebook-f"></i></a>
+<a href="#"><i class="fab fa-instagram"></i></a>
+<a href="#"><i class="fab fa-youtube"></i></a>
+<a href="#"><i class="fab fa-twitter"></i></a>
 </div>
+
+<p class="mt-3">
+Email: info@amazingbridges.com
+</p>
+
 </div>
+
+</div>
+
+<hr>
+
+<div class="text-center">
+<p class="mb-0">
+© 2026 Amazing Bridges | All Rights Reserved
+</p>
+</div>
+
+</div>
+
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

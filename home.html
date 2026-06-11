@@ -13,7 +13,59 @@
 <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="css/stylee.css">
 
+<style>
+    .custom-input{
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    padding: 12px;
+    transition: all .3s ease;
+}
 
+.custom-input:focus{
+    border-color: #ffc107;
+    box-shadow: 0 0 12px rgba(255,193,7,.4);
+}
+
+.btn-custom{
+    padding: 10px 25px;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.btn-custom:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0,0,0,.2);
+}
+
+.error{
+    border-color: #dc3545;
+    animation: shake .4s;
+}
+
+.success{
+    border-color: #198754;
+}
+#feedbackForm{
+    background: #fff;
+    padding: 35px;
+    border: 2px solid #198754;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    transition: all 0.3s ease;
+}
+#feedbackForm:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.18);
+}
+@keyframes shake{
+    0%{transform:translateX(0);}
+    25%{transform:translateX(-5px);}
+    50%{transform:translateX(5px);}
+    75%{transform:translateX(-5px);}
+    100%{transform:translateX(0);}
+}
+</style>
 </head>
 
 <body>
@@ -226,24 +278,28 @@ class="img-fluid">
 Feedback
 </h2>
 
-<form>
+<form id="feedbackForm">
 
-<input type="text"
-class="form-control mb-3"
-placeholder="Name">
+    <input type="text"
+           id="name"
+           class="form-control custom-input mb-3"
+           placeholder="Name">
 
-<input type="email"
-class="form-control mb-3"
-placeholder="Email">
+    <input type="email"
+           id="email"
+           class="form-control custom-input mb-3"
+           placeholder="Email">
 
-<textarea
-class="form-control mb-3"
-rows="4"
-placeholder="Feedback"></textarea>
+    <textarea id="feedback"
+              class="form-control custom-input mb-3"
+              rows="4"
+              placeholder="Feedback"></textarea>
 
-<button class="btn btn-warning">
-Submit
-</button>
+    <button type="submit" class="btn btn-warning btn-custom">
+        Submit
+    </button>
+
+    <div id="message" class="mt-3"></div>
 
 </form>
 
@@ -327,6 +383,61 @@ $(this).removeClass("shadow-lg");
 
 });
 
+});
+
+document.getElementById("feedbackForm")
+.addEventListener("submit", function(e){
+
+    e.preventDefault();
+
+    const name = document.getElementById("name");
+    const email = document.getElementById("email");
+    const feedback = document.getElementById("feedback");
+    const msg = document.getElementById("message");
+
+    let valid = true;
+
+    [name,email,feedback].forEach(field=>{
+        field.classList.remove("error","success");
+    });
+
+    if(name.value.trim() === ""){
+        name.classList.add("error");
+        valid = false;
+    }else{
+        name.classList.add("success");
+    }
+
+    const emailPattern =
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if(!emailPattern.test(email.value)){
+        email.classList.add("error");
+        valid = false;
+    }else{
+        email.classList.add("success");
+    }
+
+    if(feedback.value.trim().length < 10){
+        feedback.classList.add("error");
+        valid = false;
+    }else{
+        feedback.classList.add("success");
+    }
+
+    if(valid){
+        msg.innerHTML =
+        '<div class="alert alert-success">✅ Feedback submitted successfully!</div>';
+
+        this.reset();
+
+        document.querySelectorAll(".success")
+        .forEach(el=>el.classList.remove("success"));
+    }
+    else{
+        msg.innerHTML =
+        '<div class="alert alert-danger">⚠ Please fill all fields correctly.</div>';
+    }
 });
 
 </script>
