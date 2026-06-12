@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Gallery</title>
     <script src="main.js"></script>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -23,6 +23,81 @@ transition:0.5s;
 .gallery-img:hover{
 transform:scale(1.05);
 box-shadow:0 10px 25px rgba(0,0,0,0.3);
+}
+
+
+.btn-close{
+opacity:1;
+padding:12px;
+border-radius:50%;
+box-shadow:0 2px 10px rgba(0,0,0,0.2);
+}
+
+.btn-close:hover{
+transform:scale(1.1);
+transition:.3s;
+}
+.custom-modal-img{
+width:800px;
+max-width:90vw;
+height:auto;
+max-height:80vh;
+object-fit:cover;
+border-radius:20px;
+display:block;
+margin:auto;
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
+}
+
+.custom-close{
+position:absolute;
+top:15px;
+right:15px;
+width:45px;
+height:45px;
+border:none;
+border-radius:50%;
+background:white;
+font-size:30px;
+font-weight:bold;
+cursor:pointer;
+z-index:999;
+}
+.custom-close:hover{
+transform:scale(1.1);
+transition:.3s;
+background:#dc3545;
+color:white;
+}
+
+.modal-content{
+background:transparent;
+}
+.modal-dialog{
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+}
+#topBtn{
+position:fixed;
+bottom:20px;
+right:20px;
+display:none;
+background:#198754;
+color:white;
+border:none;
+width:50px;
+height:50px;
+border-radius:50%;
+cursor:pointer;
+font-size:20px;
+z-index:999;
+box-shadow:0 5px 15px rgba(0,0,0,.3);
+}
+
+#topBtn:hover{
+background:#146c43;
 }
 </style>
 </head>
@@ -173,19 +248,30 @@ data-bs-target="#imgModal">
 
 </section>
 
-<!-- MODAL -->
+<!-- IMAGE MODAL -->
 
-<div class="modal fade" id="imgModal">
+<div class="modal fade" id="imgModal" tabindex="-1">
 
-<div class="modal-dialog modal-xl">
+<div class="modal-dialog modal-dialog-centered">
 
-<div class="modal-content">
+<div class="modal-content bg-transparent border-0">
 
-<div class="modal-body p-0">
+<div class="position-relative d-inline-block mx-auto">
 
 <img id="modalImg"
 src=""
-class="img-fluid w-100">
+class="custom-modal-img">
+
+<!-- CROSS BUTTON -->
+
+<button
+type="button"
+class="custom-close"
+data-bs-dismiss="modal">
+
+&times;
+
+</button>
 
 </div>
 
@@ -194,6 +280,9 @@ class="img-fluid w-100">
 </div>
 
 </div>
+<button id="topBtn">
+<i class="fa-solid fa-arrow-up"></i>
+</button>
 <!-- FOOTER -->
 
 <footer class="footer-section">
@@ -265,6 +354,29 @@ $("#modalImg").attr("src",imgSrc);
 });
 
 });
+window.onscroll=function(){
+
+if(document.documentElement.scrollTop>300){
+
+document.getElementById("topBtn").style.display="block";
+
+}
+else{
+
+document.getElementById("topBtn").style.display="none";
+
+}
+
+}
+
+document.getElementById("topBtn").onclick=function(){
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
 </script>
 </body>
 </html>
